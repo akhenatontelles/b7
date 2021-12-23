@@ -32,10 +32,8 @@ class Auth{
         $user = $userDao->findByEmail($email);
         if($user) {
 
-            echo "VERIFICOU EMAIL";
-            exit;
-
             if(password_verify($password, $user->password)){
+                  
                 $token = md5(time().rand(0,9999));
 
                 $_SESSEION['token'] = $token;

@@ -34,6 +34,7 @@ if($name && $email && $password &&  $birthdate){
     }else{
         $_SESSION['flash'] = 'E-mail já cadastrado';
         header("Location: ".$base."/signup.php");
+        exit;
     }
 }
 

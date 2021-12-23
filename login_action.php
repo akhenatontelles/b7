@@ -7,7 +7,7 @@ $password = filter_INPUT(INPUT_POST,'password');
 
 
 
-if($email && $senha){
+if($email && $password){
     
     $auth= new Auth($pdo, $base);
 

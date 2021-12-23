@@ -17,7 +17,7 @@ class UserDaoMysql implements UserDAO{
         $u->birthdate  = $array ['birthdate'] ?? '';
         $u->city = $array['city'] ?? '';
         $u->work = $array['work'] ?? '';
-        $u->avatar =$array['avatar'] ?? '';
+        $u->avatar = $array['avatar'] ?? '';
         $u->cover = $array['cover'] ?? '';
         $u->token = $array['token'] ?? '';
 
@@ -44,7 +44,7 @@ class UserDaoMysql implements UserDAO{
   }
 
   public function  findByEmail($email){
-      if(!empty($token)){
+      if(!empty($email)){
 
         $sql= $this->pdo->prepare("SELECT * FROM users WHERE email =:email");
         $sql->bindValue(':email', $email);
@@ -65,23 +65,27 @@ class UserDaoMysql implements UserDAO{
         email = :email,
         password = :password,
         name = :name,
-        birthdate = birthdate,
+        birthdate = :birthdate,
         city = :city,
+        work = :work,
         avatar = :avatar,
+        cover = :cover,
         token = :token
-        WHERE id = id");
+        WHERE id = :id");
 
     $sql->bindValue(':email', $u->email);
-    $sql->bindValue(':passward',$u->passward);
-    $sql->bindValue(':name',$u->name);
+    $sql->bindValue(':password', $u->password);
+    $sql->bindValue(':name', $u->name);
     $sql->bindValue(':birthdate', $u->birthdate);
     $sql->bindValue(':city', $u->city);
-    $sql->bindValue(':work',$u->work);
-    $sql->bindValue(':avatar',$u->avatar);
-    $sql->bindValue(':cover',$u->cover);
-    $sql->bindvalue(':token',$u->token);
+    $sql->bindValue(':work', $u->work);
+    $sql->bindValue(':avatar', $u->avatar);
+    $sql->bindValue(':cover', $u->cover);
+    $sql->bindValue(':token', $u->token);
     $sql->bindValue(':id', $u->id);
     $sql->execute();
+
+    return true;
 
     }
 
