@@ -98,14 +98,7 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`id`, `email`, `password`, `name`, `birthdate`, `city`, `work`, `avatar`, `cover`, `token`) VALUES
 (1, 'asasd@aasdas.com', '$2y$10$uDV0hS68HgSCJQ1Bi72BueDN2TKeHGdgxc5ZKXL2nVla2OnKJ2VsW', 'Akhenaton', '2012-12-12', '', '', '', '', '4844b6a9b44f10c952b808ebb89879f9'),
-(2, 'asasd@aasdas.com', '$2y$10$H2AgOXo58MQaiE0dI591aebOkwNNQj9OQ4wTIa/bEHoUWH2CBmkJ.', 'Akhenaton', '2012-12-12', '', '', '', '', 'eb01b9203b41b2e9c85646e228316690'),
-(3, 'asasd@aasdas.com', '$2y$10$..7qTMS2Lx51yf2xKBaOMOR8i8Chc08LIjWcdz..UkbK90Q/SJHLq', 'Akhenaton', '2012-12-12', '', '', '', '', 'bae03a2ab814d7b3d5b6b86e3df5cd5f'),
-(4, 'asasd@aasdas.com', '$2y$10$RGPgpfNxzpMKV91fjNaDyeOr2gkz3QV04r/OTdzQFyARz1ZmmtmSq', 'Akhenaton', '2012-12-12', '', '', '', '', '685f2e578dd494fe02b0b1e0db029ad2'),
-(5, 'asasd@aasdas.com', '$2y$10$W3CO6Y7kRzBxdd3J5vjWcOsYXNgN7tfjlZgbPkmPVzGd0JpiQ5jxi', 'Akhenaton', '2012-12-12', '', '', '', '', '9f80af5e00e3deb76903c16e9d270958'),
-(6, 'asasd@aasdas.com', '$2y$10$5DB9QXSOncakJhCsijBRpOLfRL2PBjoWvf6MPSuzr3jv2pF2/WEvu', 'Akhenaton', '1111-11-11', '', '', '', '', 'dded9755eb7660ca480b88ac164c65db'),
-(7, 'akhenaotntelles@hotmail.com', '$2y$10$Ogv.0Lk47tSV/9IG8eniNOKx1b0dE8cJDLCBdWVs/Rj9kOR9oeX96', 'Akhenaton', '2011-11-11', '', '', '', '', 'cd4467737db6f340d319b22d42c70b53'),
-(8, 'akhenaotntelles@hotmail.com', '$2y$10$xdMgdlzyh70ufqI0gR9S1uXYTmR1qP19wsBhXjuG32dwlwuO3ijU2', 'Akhenaton', '2010-10-10', '', '', '', '', '36688698015113d908727c675b450ae7'),
-(9, 'akhenaotntelles@hotmail.com', '$2y$10$t.yYpMMy2HXF9ZpNDcrFReDFLuZuAcUQ23DkG3LDbkCzmJVy/tque', 'Akhenaton', '2012-12-12', NULL, NULL, NULL, NULL, '507dc715620b711306a9330ec6846028');
+(9, 'akhenatontelles@hotmail.com', '$2y$10$t.yYpMMy2HXF9ZpNDcrFReDFLuZuAcUQ23DkG3LDbkCzmJVy/tque', 'Akhenaton', '2012-12-12', NULL, NULL, NULL, NULL, '507dc715620b711306a9330ec6846028');
 
 --
 -- Índices para tabelas despejadas
