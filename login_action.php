@@ -17,6 +17,6 @@ if($auth->validateLogin($email, $password)){
 }
 
 }
-$_SESSION['flash'] = 'E-mail  ou senha errado 2';
+$_SESSION['flash'] = 'E-mail  ou senha errado';
 header("Location: ".$base."login.php");
 exit;

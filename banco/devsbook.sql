@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 21-Dez-2021 às 18:14
+-- Tempo de geração: 23-Dez-2021 às 16:00
 -- Versão do servidor: 10.4.21-MariaDB
 -- versão do PHP: 8.0.12
 
@@ -97,8 +97,10 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `email`, `password`, `name`, `birthdate`, `city`, `work`, `avatar`, `cover`, `token`) VALUES
-(1, 'asasd@aasdas.com', '$2y$10$uDV0hS68HgSCJQ1Bi72BueDN2TKeHGdgxc5ZKXL2nVla2OnKJ2VsW', 'Akhenaton', '2012-12-12', '', '', '', '', '4844b6a9b44f10c952b808ebb89879f9'),
-(9, 'akhenatontelles@hotmail.com', '$2y$10$t.yYpMMy2HXF9ZpNDcrFReDFLuZuAcUQ23DkG3LDbkCzmJVy/tque', 'Akhenaton', '2012-12-12', NULL, NULL, NULL, NULL, '507dc715620b711306a9330ec6846028');
+(10, 'akhenaotntelles@hotmail.com', '$2y$10$YxYtquVA8feglaOLvd.SvefLjH3FLJ3lji/Qiema.jRdKlz7gfCee', 'Akhenaton', '1111-11-11', '', '', '', '', 'a02a47e1663a22edeba16b829e359fd0'),
+(11, 'asasd@aasdas.com', '$2y$10$0b1IfOMJLgVhquEXTczdV.qVWn5xrmAi4AOXh7oHmgVnVMK1BLr96', 'Akhenaton', '2012-12-12', '', '', '', '', 'e5be0d58b18303bf6c913b87014c4e70'),
+(12, 'aqsasd@aasdas.com', '$2y$10$.1s5LaAuzWpb7vCfAR339uPj5nu6q9Sn0qmqyP8zA3/A4vfnqm/9u', 'Akhenaton', '2012-12-12', NULL, NULL, NULL, NULL, 'e256ed5a40d91665248fbae6e77fd35e'),
+(13, 'akhenatontelles@hotmail.com', '$2y$10$jB5H2DqSRkWWrpGr/cSX4.un2bUn1vbJZFBUR9I05ItKdBLKgP1Dm', 'Akhenaton', '2012-12-12', '', '', '', '', '1a541c38fb415e7ca75ce529d9f81c83');
 
 --
 -- Índices para tabelas despejadas
@@ -166,7 +168,7 @@ ALTER TABLE `userrelations`
 -- AUTO_INCREMENT de tabela `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
