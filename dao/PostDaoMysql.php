@@ -2,6 +2,8 @@
 require_once 'models/Post.php';
 require_once 'dao/UserRelationDaoMysql.php';
 require_once 'dao/UserDaoMysql.php';
+require_once 'dao/PostLikeDaoMysql.php';
+require_once 'dao/PostCommentDaoMysql.php';
 
 class PostDaoMysql implements PostDAO  {
     private $pdo;
@@ -23,6 +25,27 @@ class PostDaoMysql implements PostDAO  {
             $sql->bindValue(':body',$p->body);
             $sql->execute();        
     }
+
+    public function getUserFeed($id_user){
+        $array =[];
+
+       // 1. Pagar os Posts ordenado pela data
+        $sql = $this->pdo->prepare("SELECT * FROM posts
+        WHERE id_user = :id_user
+        ORDER BY created_at DESC");
+        $sql->bindValue(':id_user', $id_user);
+        $sql->execute();
+
+        if($sql->rowCount() > 0){
+            $data = $sql->fetchAll(PDO:: FETCH_ASSOC);
+
+            //2 . Transformar o resultado em objetos
+            $array = $this->_postListToObject($data, $id_user);
+        }
+
+        return $array;
+    }
+
     public function getHomeFeed($id_user){
         $array =[];
 
@@ -40,8 +63,23 @@ class PostDaoMysql implements PostDAO  {
 
             //3. Transformar o resultado em objetos
             $array = $this->_postListToObject($data, $id_user);
+        }
 
+        return $array;
+    }
 
+    public function getPhotosFrom($id_user){
+        $array = [];
+
+        $sql = $this->pdo->prepare("SELECT *FROM posts
+        WHERE id_user = :id_user AND type ='photo'
+        ORDER BY created_at DESC");
+        $sql->bindValue(':id_user', $id_user);
+        $sql->execute();
+
+        if($sql->rowCount() > 0){
+            $data =  $sql->fetchAll(PDO::FETCH_ASSOC);
+            $array = $this->_postListToObject($data, $id_user);
         }
 
         return $array;
@@ -50,6 +88,8 @@ class PostDaoMysql implements PostDAO  {
     private function _postListToObject($post_list, $id_user){
         $posts =[];
         $userDao  = new UserDaoMysql($this->pdo);
+        $postLikeDao =  new PostLikeDaoMysql($this->pdo);
+        $postCommentDao = new PostCommentDaoMysql($this->pdo);
 
         foreach($post_list as $post_item){
             $newPost = new Post();
@@ -60,7 +100,7 @@ class PostDaoMysql implements PostDAO  {
             $newPost->body = $post_item['body'];
             $newPost->mine = false;
 
-            if($post_item['id_user']== $id_user){
+            if($post_item['id_user'] == $id_user){
                 $newPost->mine = true;
                 }
                     //Pegar informaçoes
@@ -68,11 +108,11 @@ class PostDaoMysql implements PostDAO  {
 
 
                     //Informaçoes sobre like
-                    $newPost->likeCount = 0;
-                    $newPost->liked = false;
+                    $newPost->likeCount = $postLikeDao->getLikeCount($newPost->id);
+                    $newPost->liked = $postLikeDao->isLiked($newPost->id, $id_user);
 
                     //Informaçoes sobre COMMENTS
-                    $newPost->comments =[];
+                    $newPost->comments = $postCommentDao->getComments($newPost->id);
                     $posts[] = $newPost;
         }
 

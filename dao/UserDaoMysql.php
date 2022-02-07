@@ -1,6 +1,7 @@
 <?php
 require_once 'models/User.php';
 require_once 'dao/UserRelationDaoMysql.php';
+require_once 'dao/PostDaoMysql.php';
 
 class UserDaoMysql implements UserDAO{
     private $pdo;
@@ -24,13 +25,24 @@ class UserDaoMysql implements UserDAO{
 
         if($full){
             $urDaoMysql = new UserRelationDaoMysql($this->pdo);
+            $postDaoMysql = new PostDaoMysql($this->pdo);
 
             //Followers = Quem segue o usuário
-            $u->$followers = $urDaoMysql->getFollowers($u->id);
+            $u->followers = $urDaoMysql->getFollowers($u->id);
+            foreach($u->followers as $key => $follower_id){
+                $newUser = $this->findById($follower_id);
+                $u->followers[$key] = $newUser;
+            }
+
             //Following = Quem o usário segue
-            $u->$following = $urDaoMysql->getFollowing($u->id);
+            $u->following = $urDaoMysql->getFollowing($u->id);
+            foreach($u->following as $key => $follower_id){
+                $newUser = $this->findById($follower_id);
+                $u->following[$key] = $newUser;
+
+            }
             //Fotos
-            $u->photos =[];
+            $u->photos = $postDaoMysql->getPhotosFrom($u->id);
         }
 
         return $u;
@@ -80,7 +92,7 @@ class UserDaoMysql implements UserDAO{
             $sql->execute();
     
             if($sql->rowCount() > 0){
-                $data = $sql->fetch(PDO:: FETCH_ASSOC);
+                $data = $sql->fetch(PDO::FETCH_ASSOC);
                 $user = $this->generateUser($data, $full);
                 return $user;
             }
@@ -88,6 +100,27 @@ class UserDaoMysql implements UserDAO{
       
             return false;
 
+    }
+
+    public function findByName($name){
+       $array = [];
+        if(!empty($name)){
+            $sql = $this->pdo->prepare("SELECT * FROM users  WHERE name LIKE :name");
+            $sql->bindValue(':name','%'.$name.'%');
+            $sql->execute();
+
+            if($sql->rowCount() > 0){
+                $data = $sql->fetchAll(PDO::FETCH_ASSOC);
+
+                foreach($data as $item){
+                    $array[] = $this->generateUser($item);
+                }
+               
+            }
+
+        }
+
+        return $array;
     }
 
     public function update(User $u){

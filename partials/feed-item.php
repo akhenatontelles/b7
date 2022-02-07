@@ -1,4 +1,6 @@
 <?php
+require_once 'feed-item-script.php';
+
 $actionPhrase = '';
 switch($item->type){
     case 'text':
@@ -10,7 +12,7 @@ switch($item->type){
     break;      
 }
 ?>
-<div class="box feed-item">
+<div class="box feed-item" data-id="<?=$item->id;?>">
                         <div class="box-body">
                             <div class="feed-item-head row mt-20 m-width-20">
                                 <div class="feed-item-head-photo">
@@ -34,6 +36,22 @@ switch($item->type){
                                 <div class="msg-btn"><?=count($item->comments)?></div>
                             </div>
                             <div class="feed-item-comments">
+                                <div class="feed-item-comments-area">
+                                    <?php foreach($item->comments as $comment): ?>
+                                        
+                                        <div class="fic-item row m-height-10 m-width-20">
+                                    <div class="fic-item-photo">
+                                        <a href="<?=$base;?>/perfil.php?id=<?=$comment->id_user;?>"><img src="<?=$base;?>/media/avatars/<?=$comment->user->avatar;?>" /></a>
+                                    </div>
+                                    <div class="fic-item-info">
+                                        <a href="<?=$base;?>/perfil.php?=id<?=$comment->id_user;?>"><?=$comment->user->name;?></a>
+                                       <?=$comment->body;?>
+                                    </div>
+                                </div>
+
+                                        <?php endforeach; ?>
+                                    
+                                </div>
                                 
                                 
 
